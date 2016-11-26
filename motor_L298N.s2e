@@ -1,0 +1,69 @@
+{ "extensionName":"Motor L298N",
+	"description":"Allow communication with Motor Drive L298N",
+  "version": "1.0.0",
+	"author":"Fernando Sousa",
+	"homepage":"https://github.com/iFernandoSousa/mBlock_motor_L298N",
+	"sort":0,
+	"extensionType":"serial",
+	"javascriptURL":"js/motor_L298N.js",
+	"firmware":"1.0.0",
+	"extensionPort":"0",
+	"blockSpecs": [
+	[
+       "w",
+       "Set ENA %n, IN1 %n, IN2 %n, IN3 %n, IN4 %n, ENB %n",
+       "setMotorPin",
+       3,
+       2,
+       4,
+       6,
+       7,
+       5,
+       {
+         "setup": "pinMode(IN1,OUTPUT);\npinMode(IN2,OUTPUT);\npinMode(IN3,OUTPUT);\npinMode(IN4,OUTPUT);\n",
+         "inc": "#define ENA {0}\n#define IN1 {1}\n#define IN2 {2}\n#define IN3 {3}\n#define IN4 {4}\n#define ENB {5}\n",
+         "def": "",
+         "work": "",
+         "loop": ""
+       }
+     ],
+     [
+       "w",
+       "Set Motor A turn %d.direction at speed %d.speed",
+       "setMotorASpeed",
+       "↻ Clockwise",
+       90,
+       {
+         "setup": "",
+         "inc": "",
+         "def": "",
+         "work": "digitalWrite(IN1,{0});\ndigitalWrite(IN2,!{0});\nanalogWrite(ENA,{1});\n",
+         "loop": ""
+       }
+     ],
+ [
+       "w",
+       "Set Motor B turn %d.direction at speed %d.speed",
+       "setMotorBSpeed",
+       "↻ Clockwise",
+       90,
+       {
+         "setup": "",
+         "inc": "",
+         "def": "",
+         "work": "digitalWrite(IN3,{0});\ndigitalWrite(IN4,!{0});\nanalogWrite(ENB,{1});\n",
+         "loop": ""
+       }
+     ]
+	],
+	"menus": {
+		"direction" : ["↻ Clockwise", "↺ Counter-Clockwise"],
+		"speed" : ["0", "50", "70", "100", "150", "200", "255"]
+	},
+	"values":{
+		"↻ Clockwise": 1,
+		"↺ Counter-Clockwise": 0
+	},
+	"translators":{
+	}
+}
